@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ABoxOfFruitText" xml:space="preserve">
+    <value>A Box Of Fruit</value>
+  </data>
+  <data name="BackToMenu" xml:space="preserve">
+    <value>← Return to Menu</value>
+  </data>
+  <data name="banqNotif" xml:space="preserve">
+    <value>Start banquet reminders</value>
+  </data>
+  <data name="BanqShop" xml:space="preserve">
+    <value>🛍 Banquet shop</value>
+  </data>
+  <data name="BazaarTreasureText" xml:space="preserve">
+    <value>Bazaar Treasure</value>
+  </data>
+  <data name="BeautifulBrushText" xml:space="preserve">
+    <value>Beautiful Brush</value>
+  </data>
+  <data name="botDescription" xml:space="preserve">
+    <value>The assistant will help you in the game 'Merchant Master' by announcing game updates and events.</value>
+  </data>
+  <data name="botName" xml:space="preserve">
+    <value>Assistant</value>
+  </data>
+  <data name="botShortDescription" xml:space="preserve">
+    <value>Assistant is a bot helper for the game "Merchant Master". It will help you plan and control the gameplay, announcing game updates and events.</value>
+  </data>
+  <data name="CaravanEscortText" xml:space="preserve">
+    <value>Caravan Escort</value>
+  </data>
+  <data name="CatchText" xml:space="preserve">
+    <value>Catch</value>
+  </data>
+  <data name="CoinDivinationText" xml:space="preserve">
+    <value>Coin Divination</value>
+  </data>
+  <data name="CookingTurkeyText" xml:space="preserve">
+    <value>Cooking Turkey</value>
+  </data>
+  <data name="CristmasPainingText" xml:space="preserve">
+    <value>Cristmas Paining</value>
+  </data>
+  <data name="CrowsBridgeText" xml:space="preserve">
+    <value>Crows Bridge</value>
+  </data>
+  <data name="DecoupageText" xml:space="preserve">
+    <value>Decoupage</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>👘Events</value>
+  </data>
+  <data name="EventNext" xml:space="preserve">
+    <value>👘Next events</value>
+  </data>
+  <data name="EventNotif" xml:space="preserve">
+    <value>👘Reminder</value>
+  </data>
+  <data name="EventNow" xml:space="preserve">
+    <value>👘Current events</value>
+  </data>
+  <data name="eventsNext" xml:space="preserve">
+    <value>List of following events</value>
+  </data>
+  <data name="eventsNotif" xml:space="preserve">
+    <value>Start event reminders</value>
+  </data>
+  <data name="eventsNow" xml:space="preserve">
+    <value>List of events now</value>
+  </data>
+  <data name="FloverTeaText" xml:space="preserve">
+    <value>Flover Tea</value>
+  </data>
+  <data name="FlowerForBeloverText" xml:space="preserve">
+    <value>Flower For Belover</value>
+  </data>
+  <data name="GAS" xml:space="preserve">
+    <value>🐵Great Ape Siege</value>
+  </data>
+  <data name="gasNotif" xml:space="preserve">
+    <value>Start GAS reminders</value>
+  </data>
+  <data name="Greeting" xml:space="preserve">
+    <value>Hello, my name is Ba Cing,
+
+I will be your assistant in the Merchant Master game. I will inform you about the current and upcoming rankings and events, the appearance of the Great Ape Siege or Mountain Adventure, as well as the update of the assortment in the Banquet Shop. I will also tell you when the stores on Shopper Row have been updated.
+
+You can find out about all my options with the command /help</value>
+  </data>
+  <data name="Guild" xml:space="preserve">
+    <value>🌸 Guild</value>
+  </data>
+  <data name="guildNotif" xml:space="preserve">
+    <value>Start guild reminders</value>
+  </data>
+  <data name="HalloweenGhostFireText" xml:space="preserve">
+    <value>Halloween Ghost Fire</value>
+  </data>
+  <data name="help" xml:space="preserve">
+    <value>Full menu</value>
+  </data>
+  <data name="HelpMessText" xml:space="preserve">
+    <value>You can contact me for the following commands:
+                    
+/fullmenu - to call the extended menu of commands;
+/shortmenu - to call a compact menu of commands;
+
+🥇&lt;b&gt;Ratings&lt;/b&gt;
+
+/now - if you want to find out about the ratings that are happening now;
+/next - if you want to know about the next ratings;
+
+👘&lt;b&gt;Events&lt;/b&gt;
+
+/eventnow - if you want to find out about events happening now;
+/eventnext - if you want to know about the next events;
+/notifeve - if you want to start or stop sending automatic notifications about in-game events;
+
+🌸&lt;b&gt;Guild&lt;/b&gt;
+
+/guild - if you want to start or stop sending automatic guild messages. Enter the name of the guild next to the command;
+
+🛍&lt;b&gt;Banquet shop&lt;/b&gt;
+
+/banshop - if you want to start or stop sending automatic notifications about updating the assortment in the Banquet Shop;
+
+🐵&lt;b&gt;Siege of the Great Ape&lt;/b&gt;
+
+/gas - if you want to start or stop sending automatic notifications about the start of the Great Ape Siege;
+
+🐨&lt;b&gt;Mountain Adventure&lt;/b&gt;
+
+/mouadv - if you want to start or stop sending automatic notifications about Mountain Adventure;
+
+🏪&lt;b&gt;Shopping rows&lt;/b&gt;
+
+/shoperrow - if you want to start or stop sending automatic notifications about Shop Row updates. Enter the server number next to the command;</value>
+  </data>
+  <data name="HideMenu" xml:space="preserve">
+    <value>↑ Hide menu ↑</value>
+  </data>
+  <data name="HolyTreeBlessingText" xml:space="preserve">
+    <value>Holy Tree Blessing</value>
+  </data>
+  <data name="IslandBattleText" xml:space="preserve">
+    <value>Island Battle</value>
+  </data>
+  <data name="MA" xml:space="preserve">
+    <value>🐨 Mountain Adventure</value>
+  </data>
+  <data name="maNotif" xml:space="preserve">
+    <value>Start MA reminders</value>
+  </data>
+  <data name="MasterArcheryText" xml:space="preserve">
+    <value>Master Archery</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MidAutumnDiceGameText" xml:space="preserve">
+    <value>Mid-Autumn Dice Game</value>
+  </data>
+  <data name="MonopolyCarnivalText" xml:space="preserve">
+    <value>Monopoly Carnival</value>
+  </data>
+  <data name="MonopolyText" xml:space="preserve">
+    <value>Monopoly</value>
+  </data>
+  <data name="MooncakeText" xml:space="preserve">
+    <value>Mooncake</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>🥇Ratings</value>
+  </data>
+  <data name="RatingNext" xml:space="preserve">
+    <value>🥇Next ratings</value>
+  </data>
+  <data name="RatingNow" xml:space="preserve">
+    <value>🥇Current ratings</value>
+  </data>
+  <data name="ratingsNext" xml:space="preserve">
+    <value>List of following ratings</value>
+  </data>
+  <data name="ratingsNow" xml:space="preserve">
+    <value>List of ratings now</value>
+  </data>
+  <data name="ShopingRow" xml:space="preserve">
+    <value>🏪Shopping row's</value>
+  </data>
+  <data name="shortHelp" xml:space="preserve">
+    <value>Short menu</value>
+  </data>
+  <data name="shortMenu" xml:space="preserve">
+    <value>I am at your service, how can I help you?
+You can contact me for the following commands:</value>
+  </data>
+  <data name="SpringTowerText" xml:space="preserve">
+    <value>Spring Tower</value>
+  </data>
+  <data name="srNotif" xml:space="preserve">
+    <value>Start SR reminders</value>
+  </data>
+  <data name="SwordsmithText" xml:space="preserve">
+    <value>Swordsmith</value>
+  </data>
+  <data name="TextMessageGAS" xml:space="preserve">
+    <value>🐵&lt;b&gt;The Siege of the Great Ape has begun!&lt;/b&gt;
+
+Don't forget to switch the main spirit between talents for efficient damage.</value>
+  </data>
+  <data name="TextMessageMA" xml:space="preserve">
+    <value>🐨&lt;b&gt;The Mountain Adventure has begun!&lt;/b&gt;
+
+Do not forget to calculate the damage you need to inflict.</value>
+  </data>
+  <data name="ThanksgivingFestivalText" xml:space="preserve">
+    <value>Thanksgiving Festival</value>
+  </data>
+  <data name="TheMatchingGameText" xml:space="preserve">
+    <value>The Matching Game</value>
+  </data>
+  <data name="TombTreasureText" xml:space="preserve">
+    <value>Tomb Treasure</value>
+  </data>
+  <data name="WeedingMasterText" xml:space="preserve">
+    <value>Weeding Master</value>
+  </data>
+  <data name="WishdomScholarText" xml:space="preserve">
+    <value>Wishdom Scholar</value>
+  </data>
+  <data name="WonderfulMelodyText" xml:space="preserve">
+    <value>Wonderful Melody</value>
+  </data>
+  <data name="WorldCommerceText" xml:space="preserve">
+    <value>World Commerce</value>
+  </data>
+  <data name="WrapGiftsText" xml:space="preserve">
+    <value>Wrap Gifts</value>
+  </data>
+</root>
