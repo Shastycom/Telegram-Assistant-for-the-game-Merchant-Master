@@ -97,6 +97,24 @@ namespace MM_Helper_in_TG.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🔔 You have started sending automatic notifications about product updates in the Banquet Shop..
+        /// </summary>
+        internal static string BanqStart {
+            get {
+                return ResourceManager.GetString("BanqStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔕 You have stopped sending automatic notifications about product updates in the Banquet Shop..
+        /// </summary>
+        internal static string BanqStop {
+            get {
+                return ResourceManager.GetString("BanqStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bazaar Treasure.
         /// </summary>
         internal static string BazaarTreasureText {
@@ -115,7 +133,7 @@ namespace MM_Helper_in_TG.Properties.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The assistant will help you in the game &apos;Merchant Master&apos; by announcing game updates and events..
+        ///   Looks up a localized string similar to The assistant will help you in the game &apos;Merchant Master&apos; by announcing game updates and events.
         /// </summary>
         internal static string botDescription {
             get {
@@ -133,7 +151,7 @@ namespace MM_Helper_in_TG.Properties.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assistant is a bot helper for the game &quot;Merchant Master&quot;. It will help you plan and control the gameplay, announcing game updates and events..
+        ///   Looks up a localized string similar to Assistant is a bot helper for the game &quot;Merchant Master&quot;.
         /// </summary>
         internal static string botShortDescription {
             get {
@@ -223,6 +241,15 @@ namespace MM_Helper_in_TG.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 👘The following events will be held:.
+        /// </summary>
+        internal static string eventNextMess {
+            get {
+                return ResourceManager.GetString("eventNextMess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 👘Reminder.
         /// </summary>
         internal static string EventNotif {
@@ -237,6 +264,15 @@ namespace MM_Helper_in_TG.Properties.Languages {
         internal static string EventNow {
             get {
                 return ResourceManager.GetString("EventNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 👘Events are currently taking place:.
+        /// </summary>
+        internal static string eventNowMess {
+            get {
+                return ResourceManager.GetString("eventNowMess", resourceCulture);
             }
         }
         
@@ -264,6 +300,126 @@ namespace MM_Helper_in_TG.Properties.Languages {
         internal static string eventsNow {
             get {
                 return ResourceManager.GetString("eventsNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⛩&apos;&lt;b&gt;Feast of Lanterns&lt;/b&gt;&apos;
+        ///Oh, the lantern festival will start soon. And during it, even the moon in the sky will be jealous, because it is not as bright as the lanterns on earth!.
+        /// </summary>
+        internal static string eventTextNext0 {
+            get {
+                return ResourceManager.GetString("eventTextNext0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🧶&apos;&lt;b&gt;Handmade embroidery&lt;/b&gt;&apos;
+        ///Handmade embroidery is an art that preserves tradition and culture, and each stitch is a story to be told..
+        /// </summary>
+        internal static string eventTextNext1 {
+            get {
+                return ResourceManager.GetString("eventTextNext1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 👺&apos;&lt;b&gt;Pear Orchard Opera&lt;/b&gt;&apos;
+        ///The Pear Orchard Opera is like a pear pie, but instead of taste, it carries culture and tradition..
+        /// </summary>
+        internal static string eventTextNext2 {
+            get {
+                return ResourceManager.GetString("eventTextNext2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🍺&apos;&lt;b&gt;Brewery&lt;/b&gt;&apos;
+        ///A brewery is a place where grain turns into art and water turns into history..
+        /// </summary>
+        internal static string eventTextNext3 {
+            get {
+                return ResourceManager.GetString("eventTextNext3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🍵&apos;&lt;b&gt;The storyteller of the tea house&lt;/b&gt;&apos;
+        ///Very soon, the storyteller from the tea house will come again. He always tells stories that make you sip your tea!.
+        /// </summary>
+        internal static string eventTextNext4 {
+            get {
+                return ResourceManager.GetString("eventTextNext4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🗿&apos;&lt;b&gt;Greetings of the God of Wealth&lt;/b&gt;&apos;
+        ///A god of wealth is someone who always knows where to find money, but never remembers where he left his wallet!.
+        /// </summary>
+        internal static string eventTextNext5 {
+            get {
+                return ResourceManager.GetString("eventTextNext5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⛩&apos;&lt;b&gt;Feast of Lanterns&lt;/b&gt;&apos;
+        ///On the festival of lanterns, even the moon in the sky will be jealous, because it is not as bright as the lanterns on earth!.
+        /// </summary>
+        internal static string eventTextNow0 {
+            get {
+                return ResourceManager.GetString("eventTextNow0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🧶&apos;&lt;b&gt;Handmade embroidery&lt;/b&gt;&apos;
+        ///Handmade embroidery is an art that preserves tradition and culture, and each stitch is a story to be told..
+        /// </summary>
+        internal static string eventTextNow1 {
+            get {
+                return ResourceManager.GetString("eventTextNow1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 👺&apos;&lt;b&gt;Pear Orchard Opera&lt;/b&gt;&apos;
+        ///The Pear Orchard Opera is like a pear pie, but instead of taste, it carries culture and tradition..
+        /// </summary>
+        internal static string eventTextNow2 {
+            get {
+                return ResourceManager.GetString("eventTextNow2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🍺&apos;&lt;b&gt;Brewery&lt;/b&gt;&apos;
+        ///A brewery is a place where grain turns into art and water turns into history..
+        /// </summary>
+        internal static string eventTextNow3 {
+            get {
+                return ResourceManager.GetString("eventTextNow3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🍵&apos;&lt;b&gt;The storyteller of the tea house&lt;/b&gt;&apos;
+        ///Oh, the storyteller from the tea house has come again. He always tells stories that make you sip your tea!.
+        /// </summary>
+        internal static string eventTextNow4 {
+            get {
+                return ResourceManager.GetString("eventTextNow4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🗿&apos;&lt;b&gt;Greetings of the God of Wealth&lt;/b&gt;&apos;
+        ///A god of wealth is someone who always knows where to find money, but never remembers where he left his wallet!.
+        /// </summary>
+        internal static string eventTextNow5 {
+            get {
+                return ResourceManager.GetString("eventTextNow5", resourceCulture);
             }
         }
         
@@ -300,6 +456,24 @@ namespace MM_Helper_in_TG.Properties.Languages {
         internal static string gasNotif {
             get {
                 return ResourceManager.GetString("gasNotif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔔 You have started sending automatic notifications about the start of the Great Ape Siege..
+        /// </summary>
+        internal static string GASStart {
+            get {
+                return ResourceManager.GetString("GASStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔕 You have stopped sending automatic notifications about the start of the Great Ape Siege..
+        /// </summary>
+        internal static string GASStop {
+            get {
+                return ResourceManager.GetString("GASStop", resourceCulture);
             }
         }
         
@@ -367,7 +541,10 @@ namespace MM_Helper_in_TG.Properties.Languages {
         ///
         ////eventnow - if you want to find out about events happening now;
         ////eventnext - if you want to know about the next events;
-        ////notifeve - if you want to start or stop sending [rest of string was truncated]&quot;;.
+        ///
+        ///🛍&lt;b&gt;Banquet shop&lt;/b&gt;
+        ///
+        ////banshop - if you wan [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HelpMessText {
             get {
@@ -421,11 +598,29 @@ namespace MM_Helper_in_TG.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🔔 You have started sending automatic notifications about the start of Mountain Adventure..
+        /// </summary>
+        internal static string MAStart {
+            get {
+                return ResourceManager.GetString("MAStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Master Archery.
         /// </summary>
         internal static string MasterArcheryText {
             get {
                 return ResourceManager.GetString("MasterArcheryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔕 You have stopped sending automatic notifications about the start of Mountain Adventure..
+        /// </summary>
+        internal static string MAStop {
+            get {
+                return ResourceManager.GetString("MAStop", resourceCulture);
             }
         }
         
@@ -471,6 +666,24 @@ namespace MM_Helper_in_TG.Properties.Languages {
         internal static string MooncakeText {
             get {
                 return ResourceManager.GetString("MooncakeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔔 You have started sending automatic notifications about in-game events..
+        /// </summary>
+        internal static string NotifStart {
+            get {
+                return ResourceManager.GetString("NotifStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔕 You have stopped sending automatic notifications about in-game events..
+        /// </summary>
+        internal static string NotifStop {
+            get {
+                return ResourceManager.GetString("NotifStop", resourceCulture);
             }
         }
         
@@ -575,6 +788,18 @@ namespace MM_Helper_in_TG.Properties.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🛍&lt;b&gt;In the Banquet Shop&lt;/b&gt; the assortment of goods has been updated.
+        ///
+        ///Check what&apos;s new.
+        ///And don&apos;t forget to buy hammers to build your guild..
+        /// </summary>
+        internal static string TextBanquetShop {
+            get {
+                return ResourceManager.GetString("TextBanquetShop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🐵&lt;b&gt;The Siege of the Great Ape has begun!&lt;/b&gt;
         ///
         ///Don&apos;t forget to switch the main spirit between talents for efficient damage..
@@ -593,6 +818,236 @@ namespace MM_Helper_in_TG.Properties.Languages {
         internal static string TextMessageMA {
             get {
                 return ResourceManager.GetString("TextMessageMA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇The following ratings will start next:
+        ///
+        ///💪&apos;&lt;b&gt;Battle of Talents&lt;/b&gt;&apos;
+        ///During this ranking, you need to maximize the power of your talents.
+        ///For this, do not forget to pump your talents and spirits.
+        ///
+        ///🥋&apos;&lt;b&gt;Trade War&lt;/b&gt;&apos;
+        ///To get points in this rating, you need to beat the most talents of other players.
+        ///Do not forget to arrange with other guild members for help..
+        /// </summary>
+        internal static string textRankingNext0 {
+            get {
+                return ResourceManager.GetString("textRankingNext0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇The following ratings will start next:
+        ///
+        ///💜&apos;&lt;b&gt;Duel of Intimacy&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+        ///Yes, the time of bags and handkerchiefs has come. Give everything.
+        ///
+        ///💍&apos;&lt;b&gt;Duel of children&lt;/b&gt;&apos;
+        ///In this rating, you need to raise and marry children. And it doesn&apos;t matter that it is immoral and unethical..
+        /// </summary>
+        internal static string textRankingNext1 {
+            get {
+                return ResourceManager.GetString("textRankingNext1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇The following ratings will start next:
+        ///
+        ///🛕&apos;&lt;b&gt;Guild Profit Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase your profit per unit of time.
+        ///Don&apos;t forget to put talents in your shops.
+        ///
+        ///💚&apos;&lt;b&gt;Charm Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+        ///Don&apos;t hesitate to give your loved one all the earrings and bracelets you&apos;ve accumulated so that she can bend over all her 358 ears and 579 hands..
+        /// </summary>
+        internal static string textRankingNext2 {
+            get {
+                return ResourceManager.GetString("textRankingNext2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇The following ratings will start next:
+        ///
+        ///🍽&apos;&lt;b&gt;Duel of Banquets&lt;/b&gt;&apos;
+        ///For this ranking, you need to attend and host banquets yourself.
+        ///Don&apos;t forget to talk to other guild members if you need help.
+        ///
+        ///💎&apos;&lt;b&gt;Ingot Match&lt;/b&gt;&apos;
+        ///In this rating you need to spend ingots..
+        /// </summary>
+        internal static string textRankingNext3 {
+            get {
+                return ResourceManager.GetString("textRankingNext3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇The following ratings will start next:
+        ///
+        ///⛩&apos;&lt;b&gt;Guild Experience Duel&lt;/b&gt;&apos;
+        ///To get points in this rating, you need to build a guild and destroy bosses.
+        ///Don&apos;t forget to build your guild with gold hammers.
+        ///
+        ///💰&apos;&lt;b&gt;Profit Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase your profit per unit of time.
+        ///Don&apos;t forget to put talents in your shops..
+        /// </summary>
+        internal static string textRankingNext4 {
+            get {
+                return ResourceManager.GetString("textRankingNext4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇The following ratings will start next:
+        ///
+        ///💚&apos;&lt;b&gt;Charm Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+        ///Don&apos;t hesitate to give your loved one all the earrings and bracelets you&apos;ve accumulated so that she can bend over all her 358 ears and 579 hands.
+        ///
+        ///💎&apos;&lt;b&gt;Ingot Match&lt;/b&gt;&apos;
+        ///In this rating you need to spend ingots..
+        /// </summary>
+        internal static string textRankingNext5 {
+            get {
+                return ResourceManager.GetString("textRankingNext5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇The following ratings will start next:
+        ///
+        ///💒&apos;&lt;b&gt;Guild Intimacy Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+        ///Yes, the time of bags and handkerchiefs has come. Give everything.
+        ///
+        ///💍&apos;&lt;b&gt;Duel Kids&lt;/b&gt;&apos;
+        ///In this rating, you need to raise and marry children..
+        /// </summary>
+        internal static string textRankingNext6 {
+            get {
+                return ResourceManager.GetString("textRankingNext6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇Now the following ratings are held:
+        ///
+        ///💪&apos;&lt;b&gt;Battle of Talents&lt;/b&gt;&apos;
+        ///During this ranking, you need to maximize the power of your talents.
+        ///For this, do not forget to pump your talents and spirits.
+        ///
+        ///🥋&apos;&lt;b&gt;Trade War&lt;/b&gt;&apos;
+        ///To get points in this rating, you need to beat the most talents of other players.
+        ///Do not forget to arrange with other guild members for help..
+        /// </summary>
+        internal static string textRankingNow0 {
+            get {
+                return ResourceManager.GetString("textRankingNow0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇Now the following ratings are held:
+        ///
+        ///💜&apos;&lt;b&gt;Duel of Intimacy&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+        ///Yes, the time of bags and handkerchiefs has come. Give everything.
+        ///
+        ///💍&apos;&lt;b&gt;Duel of children&lt;/b&gt;&apos;
+        ///In this rating, you need to raise and marry children. And it doesn&apos;t matter that it is immoral and unethical..
+        /// </summary>
+        internal static string textRankingNow1 {
+            get {
+                return ResourceManager.GetString("textRankingNow1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇Now the following ratings are held:
+        ///
+        ///🛕&apos;&lt;b&gt;Guild Profit Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase your profit per unit of time.
+        ///Don&apos;t forget to put talents in your shops.
+        ///
+        ///💚&apos;&lt;b&gt;Charm Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+        ///Don&apos;t hesitate to give your loved one all the earrings and bracelets you&apos;ve accumulated so that she can bend over all her 358 ears and 579 hands..
+        /// </summary>
+        internal static string textRankingNow2 {
+            get {
+                return ResourceManager.GetString("textRankingNow2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇Now the following ratings are held:
+        ///
+        ///🍽&apos;&lt;b&gt;Duel of Banquets&lt;/b&gt;&apos;
+        ///For this ranking, you need to attend and host banquets yourself.
+        ///Don&apos;t forget to talk to other guild members if you need help.
+        ///
+        ///💎&apos;&lt;b&gt;Ingot Match&lt;/b&gt;&apos;
+        ///In this rating you need to spend ingots..
+        /// </summary>
+        internal static string textRankingNow3 {
+            get {
+                return ResourceManager.GetString("textRankingNow3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇Now the following ratings are held:
+        ///
+        ///⛩&apos;&lt;b&gt;Guild Experience Duel&lt;/b&gt;&apos;
+        ///To get points in this rating, you need to build a guild and destroy bosses.
+        ///Don&apos;t forget to build your guild with gold hammers.
+        ///
+        ///💰&apos;&lt;b&gt;Profit Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase your profit per unit of time.
+        ///Don&apos;t forget to put talents in your shops..
+        /// </summary>
+        internal static string textRankingNow4 {
+            get {
+                return ResourceManager.GetString("textRankingNow4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇Now the following ratings are held:
+        ///
+        ///💚&apos;&lt;b&gt;Charm Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+        ///Don&apos;t hesitate to give your loved one all the earrings and bracelets you&apos;ve accumulated so that she can bend over all her 358 ears and 579 hands.
+        ///
+        ///💎&apos;&lt;b&gt;Ingot Match&lt;/b&gt;&apos;
+        ///In this rating you need to spend ingots..
+        /// </summary>
+        internal static string textRankingNow5 {
+            get {
+                return ResourceManager.GetString("textRankingNow5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🥇Now the following ratings are held:
+        ///
+        ///💒&apos;&lt;b&gt;Guild Intimacy Duel&lt;/b&gt;&apos;
+        ///In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+        ///Yes, the time of bags and handkerchiefs has come. Give everything.
+        ///
+        ///💍&apos;&lt;b&gt;Duel Kids&lt;/b&gt;&apos;
+        ///In this rating, you need to raise and marry children..
+        /// </summary>
+        internal static string textRankingNow6 {
+            get {
+                return ResourceManager.GetString("textRankingNow6", resourceCulture);
             }
         }
         

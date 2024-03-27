@@ -129,6 +129,12 @@
   <data name="BanqShop" xml:space="preserve">
     <value>🛍 Banquet shop</value>
   </data>
+  <data name="BanqStart" xml:space="preserve">
+    <value>🔔 You have started sending automatic notifications about product updates in the Banquet Shop.</value>
+  </data>
+  <data name="BanqStop" xml:space="preserve">
+    <value>🔕 You have stopped sending automatic notifications about product updates in the Banquet Shop.</value>
+  </data>
   <data name="BazaarTreasureText" xml:space="preserve">
     <value>Bazaar Treasure</value>
   </data>
@@ -136,13 +142,13 @@
     <value>Beautiful Brush</value>
   </data>
   <data name="botDescription" xml:space="preserve">
-    <value>The assistant will help you in the game 'Merchant Master' by announcing game updates and events.</value>
+    <value>The assistant will help you in the game 'Merchant Master' by announcing game updates and events</value>
   </data>
   <data name="botName" xml:space="preserve">
     <value>Assistant</value>
   </data>
   <data name="botShortDescription" xml:space="preserve">
-    <value>Assistant is a bot helper for the game "Merchant Master". It will help you plan and control the gameplay, announcing game updates and events.</value>
+    <value>Assistant is a bot helper for the game "Merchant Master"</value>
   </data>
   <data name="CaravanEscortText" xml:space="preserve">
     <value>Caravan Escort</value>
@@ -171,11 +177,17 @@
   <data name="EventNext" xml:space="preserve">
     <value>👘Next events</value>
   </data>
+  <data name="eventNextMess" xml:space="preserve">
+    <value>👘The following events will be held:</value>
+  </data>
   <data name="EventNotif" xml:space="preserve">
     <value>👘Reminder</value>
   </data>
   <data name="EventNow" xml:space="preserve">
     <value>👘Current events</value>
+  </data>
+  <data name="eventNowMess" xml:space="preserve">
+    <value>👘Events are currently taking place:</value>
   </data>
   <data name="eventsNext" xml:space="preserve">
     <value>List of following events</value>
@@ -185,6 +197,54 @@
   </data>
   <data name="eventsNow" xml:space="preserve">
     <value>List of events now</value>
+  </data>
+  <data name="eventTextNext0" xml:space="preserve">
+    <value>⛩'&lt;b&gt;Feast of Lanterns&lt;/b&gt;'
+Oh, the lantern festival will start soon. And during it, even the moon in the sky will be jealous, because it is not as bright as the lanterns on earth!</value>
+  </data>
+  <data name="eventTextNext1" xml:space="preserve">
+    <value>🧶'&lt;b&gt;Handmade embroidery&lt;/b&gt;'
+Handmade embroidery is an art that preserves tradition and culture, and each stitch is a story to be told.</value>
+  </data>
+  <data name="eventTextNext2" xml:space="preserve">
+    <value>👺'&lt;b&gt;Pear Orchard Opera&lt;/b&gt;'
+The Pear Orchard Opera is like a pear pie, but instead of taste, it carries culture and tradition.</value>
+  </data>
+  <data name="eventTextNext3" xml:space="preserve">
+    <value>🍺'&lt;b&gt;Brewery&lt;/b&gt;'
+A brewery is a place where grain turns into art and water turns into history.</value>
+  </data>
+  <data name="eventTextNext4" xml:space="preserve">
+    <value>🍵'&lt;b&gt;The storyteller of the tea house&lt;/b&gt;'
+Very soon, the storyteller from the tea house will come again. He always tells stories that make you sip your tea!</value>
+  </data>
+  <data name="eventTextNext5" xml:space="preserve">
+    <value>🗿'&lt;b&gt;Greetings of the God of Wealth&lt;/b&gt;'
+A god of wealth is someone who always knows where to find money, but never remembers where he left his wallet!</value>
+  </data>
+  <data name="eventTextNow0" xml:space="preserve">
+    <value>⛩'&lt;b&gt;Feast of Lanterns&lt;/b&gt;'
+On the festival of lanterns, even the moon in the sky will be jealous, because it is not as bright as the lanterns on earth!</value>
+  </data>
+  <data name="eventTextNow1" xml:space="preserve">
+    <value>🧶'&lt;b&gt;Handmade embroidery&lt;/b&gt;'
+Handmade embroidery is an art that preserves tradition and culture, and each stitch is a story to be told.</value>
+  </data>
+  <data name="eventTextNow2" xml:space="preserve">
+    <value>👺'&lt;b&gt;Pear Orchard Opera&lt;/b&gt;'
+The Pear Orchard Opera is like a pear pie, but instead of taste, it carries culture and tradition.</value>
+  </data>
+  <data name="eventTextNow3" xml:space="preserve">
+    <value>🍺'&lt;b&gt;Brewery&lt;/b&gt;'
+A brewery is a place where grain turns into art and water turns into history.</value>
+  </data>
+  <data name="eventTextNow4" xml:space="preserve">
+    <value>🍵'&lt;b&gt;The storyteller of the tea house&lt;/b&gt;'
+Oh, the storyteller from the tea house has come again. He always tells stories that make you sip your tea!</value>
+  </data>
+  <data name="eventTextNow5" xml:space="preserve">
+    <value>🗿'&lt;b&gt;Greetings of the God of Wealth&lt;/b&gt;'
+A god of wealth is someone who always knows where to find money, but never remembers where he left his wallet!</value>
   </data>
   <data name="FloverTeaText" xml:space="preserve">
     <value>Flover Tea</value>
@@ -197,6 +257,12 @@
   </data>
   <data name="gasNotif" xml:space="preserve">
     <value>Start GAS reminders</value>
+  </data>
+  <data name="GASStart" xml:space="preserve">
+    <value>🔔 You have started sending automatic notifications about the start of the Great Ape Siege.</value>
+  </data>
+  <data name="GASStop" xml:space="preserve">
+    <value>🔕 You have stopped sending automatic notifications about the start of the Great Ape Siege.</value>
   </data>
   <data name="Greeting" xml:space="preserve">
     <value>Hello, my name is Ba Cing,
@@ -232,11 +298,6 @@ You can find out about all my options with the command /help</value>
 
 /eventnow - if you want to find out about events happening now;
 /eventnext - if you want to know about the next events;
-/notifeve - if you want to start or stop sending automatic notifications about in-game events;
-
-🌸&lt;b&gt;Guild&lt;/b&gt;
-
-/guild - if you want to start or stop sending automatic guild messages. Enter the name of the guild next to the command;
 
 🛍&lt;b&gt;Banquet shop&lt;/b&gt;
 
@@ -248,11 +309,7 @@ You can find out about all my options with the command /help</value>
 
 🐨&lt;b&gt;Mountain Adventure&lt;/b&gt;
 
-/mouadv - if you want to start or stop sending automatic notifications about Mountain Adventure;
-
-🏪&lt;b&gt;Shopping rows&lt;/b&gt;
-
-/shoperrow - if you want to start or stop sending automatic notifications about Shop Row updates. Enter the server number next to the command;</value>
+/mouadv - if you want to start or stop sending automatic notifications about Mountain Adventure;</value>
   </data>
   <data name="HideMenu" xml:space="preserve">
     <value>↑ Hide menu ↑</value>
@@ -269,8 +326,14 @@ You can find out about all my options with the command /help</value>
   <data name="maNotif" xml:space="preserve">
     <value>Start MA reminders</value>
   </data>
+  <data name="MAStart" xml:space="preserve">
+    <value>🔔 You have started sending automatic notifications about the start of Mountain Adventure.</value>
+  </data>
   <data name="MasterArcheryText" xml:space="preserve">
     <value>Master Archery</value>
+  </data>
+  <data name="MAStop" xml:space="preserve">
+    <value>🔕 You have stopped sending automatic notifications about the start of Mountain Adventure.</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
@@ -286,6 +349,12 @@ You can find out about all my options with the command /help</value>
   </data>
   <data name="MooncakeText" xml:space="preserve">
     <value>Mooncake</value>
+  </data>
+  <data name="NotifStart" xml:space="preserve">
+    <value>🔔 You have started sending automatic notifications about in-game events.</value>
+  </data>
+  <data name="NotifStop" xml:space="preserve">
+    <value>🔕 You have stopped sending automatic notifications about in-game events.</value>
   </data>
   <data name="Rating" xml:space="preserve">
     <value>🥇Ratings</value>
@@ -321,6 +390,12 @@ You can contact me for the following commands:</value>
   <data name="SwordsmithText" xml:space="preserve">
     <value>Swordsmith</value>
   </data>
+  <data name="TextBanquetShop" xml:space="preserve">
+    <value>🛍&lt;b&gt;In the Banquet Shop&lt;/b&gt; the assortment of goods has been updated.
+
+Check what's new.
+And don't forget to buy hammers to build your guild.</value>
+  </data>
   <data name="TextMessageGAS" xml:space="preserve">
     <value>🐵&lt;b&gt;The Siege of the Great Ape has begun!&lt;/b&gt;
 
@@ -330,6 +405,152 @@ Don't forget to switch the main spirit between talents for efficient damage.</va
     <value>🐨&lt;b&gt;The Mountain Adventure has begun!&lt;/b&gt;
 
 Do not forget to calculate the damage you need to inflict.</value>
+  </data>
+  <data name="textRankingNext0" xml:space="preserve">
+    <value>🥇The following ratings will start next:
+
+💪'&lt;b&gt;Battle of Talents&lt;/b&gt;'
+During this ranking, you need to maximize the power of your talents.
+For this, do not forget to pump your talents and spirits.
+
+🥋'&lt;b&gt;Trade War&lt;/b&gt;'
+To get points in this rating, you need to beat the most talents of other players.
+Do not forget to arrange with other guild members for help.</value>
+  </data>
+  <data name="textRankingNext1" xml:space="preserve">
+    <value>🥇The following ratings will start next:
+
+💜'&lt;b&gt;Duel of Intimacy&lt;/b&gt;'
+In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+Yes, the time of bags and handkerchiefs has come. Give everything.
+
+💍'&lt;b&gt;Duel of children&lt;/b&gt;'
+In this rating, you need to raise and marry children. And it doesn't matter that it is immoral and unethical.</value>
+  </data>
+  <data name="textRankingNext2" xml:space="preserve">
+    <value>🥇The following ratings will start next:
+
+🛕'&lt;b&gt;Guild Profit Duel&lt;/b&gt;'
+In this rating, you need to increase your profit per unit of time.
+Don't forget to put talents in your shops.
+
+💚'&lt;b&gt;Charm Duel&lt;/b&gt;'
+In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+Don't hesitate to give your loved one all the earrings and bracelets you've accumulated so that she can bend over all her 358 ears and 579 hands.</value>
+  </data>
+  <data name="textRankingNext3" xml:space="preserve">
+    <value>🥇The following ratings will start next:
+
+🍽'&lt;b&gt;Duel of Banquets&lt;/b&gt;'
+For this ranking, you need to attend and host banquets yourself.
+Don't forget to talk to other guild members if you need help.
+
+💎'&lt;b&gt;Ingot Match&lt;/b&gt;'
+In this rating you need to spend ingots.</value>
+  </data>
+  <data name="textRankingNext4" xml:space="preserve">
+    <value>🥇The following ratings will start next:
+
+⛩'&lt;b&gt;Guild Experience Duel&lt;/b&gt;'
+To get points in this rating, you need to build a guild and destroy bosses.
+Don't forget to build your guild with gold hammers.
+
+💰'&lt;b&gt;Profit Duel&lt;/b&gt;'
+In this rating, you need to increase your profit per unit of time.
+Don't forget to put talents in your shops.</value>
+  </data>
+  <data name="textRankingNext5" xml:space="preserve">
+    <value>🥇The following ratings will start next:
+
+💚'&lt;b&gt;Charm Duel&lt;/b&gt;'
+In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+Don't hesitate to give your loved one all the earrings and bracelets you've accumulated so that she can bend over all her 358 ears and 579 hands.
+
+💎'&lt;b&gt;Ingot Match&lt;/b&gt;'
+In this rating you need to spend ingots.</value>
+  </data>
+  <data name="textRankingNext6" xml:space="preserve">
+    <value>🥇The following ratings will start next:
+
+💒'&lt;b&gt;Guild Intimacy Duel&lt;/b&gt;'
+In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+Yes, the time of bags and handkerchiefs has come. Give everything.
+
+💍'&lt;b&gt;Duel Kids&lt;/b&gt;'
+In this rating, you need to raise and marry children.</value>
+  </data>
+  <data name="textRankingNow0" xml:space="preserve">
+    <value>🥇Now the following ratings are held:
+
+💪'&lt;b&gt;Battle of Talents&lt;/b&gt;'
+During this ranking, you need to maximize the power of your talents.
+For this, do not forget to pump your talents and spirits.
+
+🥋'&lt;b&gt;Trade War&lt;/b&gt;'
+To get points in this rating, you need to beat the most talents of other players.
+Do not forget to arrange with other guild members for help.</value>
+  </data>
+  <data name="textRankingNow1" xml:space="preserve">
+    <value>🥇Now the following ratings are held:
+
+💜'&lt;b&gt;Duel of Intimacy&lt;/b&gt;'
+In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+Yes, the time of bags and handkerchiefs has come. Give everything.
+
+💍'&lt;b&gt;Duel of children&lt;/b&gt;'
+In this rating, you need to raise and marry children. And it doesn't matter that it is immoral and unethical.</value>
+  </data>
+  <data name="textRankingNow2" xml:space="preserve">
+    <value>🥇Now the following ratings are held:
+
+🛕'&lt;b&gt;Guild Profit Duel&lt;/b&gt;'
+In this rating, you need to increase your profit per unit of time.
+Don't forget to put talents in your shops.
+
+💚'&lt;b&gt;Charm Duel&lt;/b&gt;'
+In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+Don't hesitate to give your loved one all the earrings and bracelets you've accumulated so that she can bend over all her 358 ears and 579 hands.</value>
+  </data>
+  <data name="textRankingNow3" xml:space="preserve">
+    <value>🥇Now the following ratings are held:
+
+🍽'&lt;b&gt;Duel of Banquets&lt;/b&gt;'
+For this ranking, you need to attend and host banquets yourself.
+Don't forget to talk to other guild members if you need help.
+
+💎'&lt;b&gt;Ingot Match&lt;/b&gt;'
+In this rating you need to spend ingots.</value>
+  </data>
+  <data name="textRankingNow4" xml:space="preserve">
+    <value>🥇Now the following ratings are held:
+
+⛩'&lt;b&gt;Guild Experience Duel&lt;/b&gt;'
+To get points in this rating, you need to build a guild and destroy bosses.
+Don't forget to build your guild with gold hammers.
+
+💰'&lt;b&gt;Profit Duel&lt;/b&gt;'
+In this rating, you need to increase your profit per unit of time.
+Don't forget to put talents in your shops.</value>
+  </data>
+  <data name="textRankingNow5" xml:space="preserve">
+    <value>🥇Now the following ratings are held:
+
+💚'&lt;b&gt;Charm Duel&lt;/b&gt;'
+In this rating, you need to increase the charm of your loved ones with the help of gifts and costumes.
+Don't hesitate to give your loved one all the earrings and bracelets you've accumulated so that she can bend over all her 358 ears and 579 hands.
+
+💎'&lt;b&gt;Ingot Match&lt;/b&gt;'
+In this rating you need to spend ingots.</value>
+  </data>
+  <data name="textRankingNow6" xml:space="preserve">
+    <value>🥇Now the following ratings are held:
+
+💒'&lt;b&gt;Guild Intimacy Duel&lt;/b&gt;'
+In this rating, you need to increase the intimacy of loved ones with the help of gifts and costumes.
+Yes, the time of bags and handkerchiefs has come. Give everything.
+
+💍'&lt;b&gt;Duel Kids&lt;/b&gt;'
+In this rating, you need to raise and marry children.</value>
   </data>
   <data name="ThanksgivingFestivalText" xml:space="preserve">
     <value>Thanksgiving Festival</value>

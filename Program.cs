@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MM_Helper_in_TG.Properties.Image;
+using Newtonsoft.Json;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -9,92 +10,75 @@ using File = System.IO.File;
 using langLocal = MM_Helper_in_TG.Properties.Languages;
 
 
-var token = "YOUR_BOT_TOKEN";
+var token = "your_bot_token";
 
-// Створіть об'єкт botClient
-var botClient = new TelegramBotClient(token);
+// Creating botClient and CancallationTokenSource object
+TelegramBotClient botClient = new TelegramBotClient(token);
 using CancellationTokenSource cts = new();
 
 
-string? exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-string? exeDir = Path.GetDirectoryName(path: exePath);
 
-//Дати перевірки для серверів 116 та 127
+// Validation dates for servers 116 and 127
 DateTime CheckDate116 = new DateTime(2023, 6, 10);
 DateTime CheckDate127 = new DateTime(2023, 6, 11);
 
-//Контрольна дата для оновлення ретингів 
+// Control date for updating ratings
 DateTime CheckRanking = new DateTime(2023, 6, 12, 8, 0, 0);
 
-
-//Встановлюємо актуальну дату та час в годинах та хвилинах
+// Current date and time in hours and minutes
 string currentTime = DateTime.Now.ToString("H:mm");
 
-//Встановлюємо час для надходження повідомлень про початок тимчасових подій 
-//Ескорт каравану
-List<string> CaravanEscortTime = new List<string> { "16:00", "22:00", "4:00" };
-List<string> CaravanEscortPre5Time = new List<string> { "15:55", "21:55", "3:55" };
-
-//Острівна битва
-List<string> IslandBattleTime = new List<string> { "18:00" };
-List<string> IslandBattlePre5Time = new List<string> { "17:55" };
-
-//Молитва Священому дереву
-List<string> HolyTreeBlessingTimeMorn = new List<string> { "8:00" };
-List<string> HolyTreeBlessingTime = new List<string> { "18:00" };
-
-
-//Встановлюємо час для надходження повідомлень про початок щоденних подій 
+// Time to receive notifications about the start of daily events
 List<string> GASTime = new List<string> { "4:00", "12:00", "20:00" };
 List<string> MATime = new List<string> { "00:01", "8:00", "16:00", "24:00" };
 List<string> ShopTime = new List<string> { "00:00", "2:00", "4:00", "6:00", "8:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"};
 
 
 
-
-
+// Initialization of variables for Ranks and Events
 int RanNow;
 int RanNext;
 int EveNow;
 int EveNext;
 
+// Cells for current events
 string? EveNowText1 = default;
 string? EveNowText2 = default;
 string? EveNowText3 = default;
 
+// Cells for the following events
 string? EveNextText1 = default;
 string? EveNextText2 = default;
 string? EveNextText3 = default;
 
 
-
-Dictionary<ChatId, string>? allUsers = LoadUsers("allUsers");
-Dictionary<ChatId, string>? eventNotifUsers = LoadUsers("eventNotifUsers");
-Dictionary<ChatId, string>? banquetShopUsers = LoadUsers("banquetShopUsers");
-Dictionary<ChatId, string>? MAUsers = LoadUsers("MAUsers");
-Dictionary<ChatId, string>? GASUsers = LoadUsers("GASUsers");
-
+// List of users for various reminders
+Dictionary<ChatId, string>? eventNotifUsers = LoadUsers("eventNotifUsers"); // event reminder users
+Dictionary<ChatId, string>? banquetShopUsers = LoadUsers("banquetShopUsers"); // banquet store reminder users
+Dictionary<ChatId, string>? MAUsers = LoadUsers("MAUsers"); // mountain adventure reminder users
+Dictionary<ChatId, string>? GASUsers = LoadUsers("GASUsers"); // users of great ape sediment reminders
 
 
 
-string language = "en"; // Replace with user's language
+// A name, description, and short description for the bot
+// A name for the bot
+await botClient.SetMyNameAsync(langLocal.Localization.botName, default, default); // Назва бота, англійською за замовчуванням
 
+// Description for the bot
+await botClient.SetMyDescriptionAsync(langLocal.Localization.botDescription, default, default); // Опис бота, англійською за замовчуванням
 
-
-await botClient.SetMyNameAsync(langLocal.Localization.botName, default, default);
-await botClient.SetMyDescriptionAsync(langLocal.Localization.botDescription, default, default);
-await botClient.SetMyShortDescriptionAsync(langLocal.Localization.botShortDescription, default, default);
+// Short description for the bot
+await botClient.SetMyShortDescriptionAsync(langLocal.Localization.botShortDescription, default, default); // Короткий опис бота, англійською за замовчуванням
 
 
 
 // Set the bot commands
-// Встановлюємо області видимості для команд
-
+// Scopes for commands are set
 BotCommandScopeAllPrivateChats scoreAllPrivateChats = new BotCommandScopeAllPrivateChats(); // Всі приватні чати
 BotCommandScopeAllGroupChats scoreAllGroupChats = new BotCommandScopeAllGroupChats(); // Участники всіх груп та супергруп
 BotCommandScopeAllChatAdministrators scopeAllChatAdministrators = new BotCommandScopeAllChatAdministrators(); // Адміністратори всіх груп та супергруп
 
-// Створюємо команди для всіх приватних груп
+// List of commands for all private groups
 List<BotCommand> commandsAllPrivateChats = new List<BotCommand>
 {
     new BotCommand { Command = "shorthelp", Description = langLocal.Localization.shortHelp},
@@ -111,7 +95,7 @@ List<BotCommand> commandsAllPrivateChats = new List<BotCommand>
     new BotCommand { Command = "srnotif", Description = langLocal.Localization.srNotif }
 };
 
-// Створюємо команди для участників всіх груп та супергруп
+// List of teams for participants of all groups and supergroups
 List<BotCommand> commandsAllGroupChats = new List<BotCommand>
 {
     new BotCommand { Command = "shorthelp", Description = langLocal.Localization.shortHelp },
@@ -122,7 +106,7 @@ List<BotCommand> commandsAllGroupChats = new List<BotCommand>
     new BotCommand { Command = "eventsnext", Description = langLocal.Localization.eventsNext }
 };
 
-// Створюємо команди для адміністраторів всіх груп та супергруп
+// List of commands for administrators of all groups and supergroups
 List<BotCommand> commandsAllChatAdministrators = new List<BotCommand>
 {
     new BotCommand { Command = "shorthelp", Description = langLocal.Localization.shortHelp},
@@ -139,18 +123,19 @@ List<BotCommand> commandsAllChatAdministrators = new List<BotCommand>
     new BotCommand { Command = "srnotif", Description = langLocal.Localization.srNotif }
 };
 
-// Встановлюємо команди 
-await botClient.SetMyCommandsAsync(commandsAllPrivateChats, scoreAllPrivateChats, default);
-await botClient.SetMyCommandsAsync(commandsAllGroupChats, scoreAllGroupChats, default);
-await botClient.SetMyCommandsAsync(commandsAllChatAdministrators, scopeAllChatAdministrators, default);
+// Set the bot commands
+await botClient.SetMyCommandsAsync(commandsAllPrivateChats, scoreAllPrivateChats, default); // всі приватні чати
+await botClient.SetMyCommandsAsync(commandsAllGroupChats, scoreAllGroupChats, default); // всі групи та супергрупи
+await botClient.SetMyCommandsAsync(commandsAllChatAdministrators, scopeAllChatAdministrators, default); //всі адміністратори груп та супергруп
 
 
-DateTime WorldCommerce = new DateTime(2023, 5, 31, 8, 0, 0);
-string WorldCommerceText = langLocal.Localization.WorldCommerceText;
 
+// Lists of events and control dates
+// that repeat every 54 days
 Dictionary<string, DateTime> events54days = new Dictionary<string, DateTime> 
 {
-    {langLocal.Localization.MooncakeText, new DateTime(2023, 6, 6, 8, 0, 0)},
+    {langLocal.Localization.WorldCommerceText, new DateTime(2023, 5, 31, 8, 0, 0)},
+    { langLocal.Localization.MooncakeText, new DateTime(2023, 6, 6, 8, 0, 0)},
     {langLocal.Localization.MonopolyCarnivalText, new DateTime(2023, 6, 12, 8, 0, 0)},
     {langLocal.Localization.WonderfulMelodyText, new DateTime(2023, 6, 18, 8, 0, 0)},
     {langLocal.Localization.IslandBattleText, new DateTime(2023, 5, 1, 8, 0, 0)},
@@ -159,6 +144,7 @@ Dictionary<string, DateTime> events54days = new Dictionary<string, DateTime>
     {langLocal.Localization.TombTreasureText, new DateTime(2023, 5, 19, 8, 0, 0)}    
 };
 
+// that repeat every 30 days
 Dictionary<string, DateTime> events30days = new Dictionary<string, DateTime>
 {
     {langLocal.Localization.BazaarTreasureText, new DateTime(2023, 5, 28, 8, 0, 0)},
@@ -168,6 +154,7 @@ Dictionary<string, DateTime> events30days = new Dictionary<string, DateTime>
     {langLocal.Localization.CoinDivinationText, new DateTime(2023, 5, 4, 8, 0, 0)}
 };
 
+// that repeat every 48 days
 Dictionary<string, DateTime> events48days = new Dictionary<string, DateTime>
 {
     {langLocal.Localization.CookingTurkeyText, new DateTime(2023, 4, 16, 8, 0, 0)},
@@ -204,16 +191,35 @@ botClient.StartReceiving(
     cancellationToken: cts.Token
 );
 
-
-
-var me = await botClient.GetMeAsync();
-
+User me = await botClient.GetMeAsync();
 Console.WriteLine($"I am user {me.Id} and my name is {me.FirstName}.");
 
-
-
+// Creating a repeating cycle
 while (true)
 {
+    // for banquet store reminders
+    if (ShopTime.Contains(currentTime))
+    {
+        Parallel.ForEach(banquetShopUsers.Keys, async user =>
+        {
+            try
+            {
+                string TextMessage = langLocal.Localization.TextBanquetShop;
+
+                await botClient.SendTextMessageAsync(
+                    chatId: user,
+                    text: TextMessage,
+                    parseMode: ParseMode.Html
+                );
+            }
+            catch (ApiRequestException ex) when (ex.ErrorCode == 403)
+            {
+                Console.WriteLine(ex);
+            }
+        });
+    }
+
+    // for the great ape siege reminders
     if (GASTime.Contains(currentTime))
     {
         Parallel.ForEach(GASUsers.Keys, async user =>
@@ -235,6 +241,7 @@ while (true)
         });
     }
 
+    // for mountain adventure reminders
     if (MATime.Contains(currentTime))
     {
         Parallel.ForEach(MAUsers.Keys, async user =>
@@ -255,9 +262,9 @@ while (true)
             }
         });
     }
-    Thread.Sleep(60000);
 
 
+    Thread.Sleep(60000); // To wait for 1 minute
 }
 
 
@@ -270,76 +277,37 @@ async Task HandleUpdateAsync(ITelegramBotClient client, Update update, Cancellat
         return;
     }
     
-    if (!(update.Message is Message message) || !(message.Text is string messageText))
-        return;
+    if (!(update.Message is Message message) || !(message.Text is string messageText)) return;
 
-    if ((DateTime.UtcNow - message.Date).TotalMinutes > 1)
-        return;
-
-    var chatId = message.Chat.Id;
-    string languageCode = message.From.LanguageCode;
-
-    if (!allUsers.TryGetValue(chatId, out var existingLanguage) || existingLanguage != language)
-    {
-        allUsers[chatId] = languageCode;
-        SaveUsers(allUsers, "allUsers");
-    }
-
-    await HandleComamnd(client, update, cancellationToken);
-
+    if ((DateTime.UtcNow - message.Date).TotalMinutes > 1) return;
+    
+    if (update.Message.Text.StartsWith("/")) { await HandleComamnd(client, update, cancellationToken); }
 }
 
 async Task HandleComamnd (ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    if (!(update.Message is Message message) || !(message.Text is string messageText))
-        return;
+    if (!(update.Message is Message message) || !(message.Text is string messageText)) return;
+    if ((DateTime.UtcNow - message.Date).TotalMinutes > 1) return;
 
-    switch (messageText)
-    {
-        case "/start":
-            await greatingMessage(client, update, cancellationToken, language);
-            break;
-        case "/shorthelp":
-            await shortHelpMessage(client, update, cancellationToken, language);
-            break;
-        case "/help":
-            await helpMessage(client, update, cancellationToken, language);
-            break;
-        case "/ratingsnow":
-            await ratingsNowMessage(client, update, cancellationToken, language);
-            break;
-        case "/ratingsnext":
-            await ratingsNextMessage(client, update, cancellationToken, language);
-            break;
-        case "/eventsnow":
-            await eventsNowMessage(client, update, cancellationToken, language);
-            break;
-        case "/eventsnext":
-            await eventsNextMessage(client, update, cancellationToken, language);
-            break;
-        case "/eventsnotif":
-            await eventsNotifMessage(client, update, cancellationToken, language);
-            break;
-        case "/banqnotif":
-            await BanquetShopMessage(client, update, cancellationToken, language);
-            break;
-        case "/gasnotif":
-            await GASMessage(client, update, cancellationToken, language);
-            break;
-        case "/manotif":
-            await MAMessage(client, update, cancellationToken, language);
-            break;
-        case "/srnotif":
-
-            break;
-    }
+    
+    if (messageText.Contains("start")) { await greatingMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("shorthelp")) { await shortHelpMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("help")) { await helpMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("ratingsnow")) { await ratingsNowMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("ratingsnext")) { await ratingsNextMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("eventsnow")) { await eventsNowMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("eventsnext")) { await eventsNextMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("banqnotif")) { await BanquetShopMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("gasnotif")) { await GASMessage(client, update, cancellationToken); }
+    else if (messageText.Contains("manotif")) { await MAMessage(client, update, cancellationToken); }
 }
+
 
 async Task HandleCallbackQuery(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {    
     CallbackQuery? callbackQuery = update.CallbackQuery;
 
-    
+    // Setting text for buttons
     string Menu = langLocal.Localization.Menu;
     
     string Rating = langLocal.Localization.Rating;    
@@ -349,7 +317,6 @@ async Task HandleCallbackQuery(ITelegramBotClient client, Update update, Cancell
     string Event = langLocal.Localization.Event;    
     string EventNow = langLocal.Localization.EventNow;    
     string EventNext = langLocal.Localization.EventNext;    
-    string EventNotif = langLocal.Localization.EventNotif;
     
     string Guild = langLocal.Localization.Guild;    
     string BanqShop = langLocal.Localization.BanqShop;    
@@ -361,7 +328,8 @@ async Task HandleCallbackQuery(ITelegramBotClient client, Update update, Cancell
     string BackToMenu = langLocal.Localization.BackToMenu;
 
 
-
+    // Creating lists with buttons
+    // List of buttons when clicking on "Menu"
     InlineKeyboardMarkup inlineKeyboardMenuFull = new InlineKeyboardMarkup(new[]
     {
         new [] { InlineKeyboardButton.WithCallbackData(Rating) },
@@ -372,6 +340,7 @@ async Task HandleCallbackQuery(ITelegramBotClient client, Update update, Cancell
         new [] { InlineKeyboardButton.WithCallbackData(HideMenu) }
     });
 
+    // List of buttons when clicking on "Rating"
     InlineKeyboardMarkup inlineKeyboardRatingMenu = new InlineKeyboardMarkup(new[]
     {
         new [] { InlineKeyboardButton.WithCallbackData(RatingNow) },
@@ -379,15 +348,15 @@ async Task HandleCallbackQuery(ITelegramBotClient client, Update update, Cancell
         new [] { InlineKeyboardButton.WithCallbackData(BackToMenu) }
     });
 
+    // List of buttons when clicking on "Events"
     InlineKeyboardMarkup inlineKeyboardEventsMenu = new InlineKeyboardMarkup(new[]
     {
         new [] { InlineKeyboardButton.WithCallbackData(EventNow) },
         new [] { InlineKeyboardButton.WithCallbackData(EventNext) },
-        new [] { InlineKeyboardButton.WithCallbackData(EventNotif) },
         new [] { InlineKeyboardButton.WithCallbackData(BackToMenu) }
     });
 
-
+    // Menu button
     InlineKeyboardMarkup inlineKeyboardMenu = new InlineKeyboardMarkup(new[]
     {
          new [] { InlineKeyboardButton.WithCallbackData(Menu) },
@@ -396,10 +365,8 @@ async Task HandleCallbackQuery(ITelegramBotClient client, Update update, Cancell
     
 
     if (callbackQuery.Data.Equals(Menu))
-    {
-        //Зчитує текст для повідомлення        
+    {             
         string shortHelpText = langLocal.Localization.shortMenu;
-
         await inlineKeyboardUpdateText(client, callbackQuery, cancellationToken, inlineKeyboardMenuFull, shortHelpText);
         return;
     }
@@ -412,14 +379,14 @@ async Task HandleCallbackQuery(ITelegramBotClient client, Update update, Cancell
 
     if (callbackQuery.Data.Equals(RatingNow))
     {
-        await ratingsNowMessage(client, update, cancellationToken, language);
-        botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id, cancellationToken: cancellationToken);
+        await ratingsNowMessage(client, update, cancellationToken);
+        await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id, cancellationToken: cancellationToken);
         return;
     }
 
     if (callbackQuery.Data.Equals(RatingNext))
     {
-        await ratingsNextMessage(client, update, cancellationToken, language);
+        await ratingsNextMessage(client, update, cancellationToken);
         await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
         return;
     }
@@ -432,49 +399,38 @@ async Task HandleCallbackQuery(ITelegramBotClient client, Update update, Cancell
 
     if (callbackQuery.Data.Equals(EventNow))
     {
-        await eventsNowMessage(client, update, cancellationToken, language);
-        botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
+        await eventsNowMessage(client, update, cancellationToken);
+        await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
         return;
     }
 
     if (callbackQuery.Data.Equals(EventNext))
     {
-        await eventsNextMessage(client, update, cancellationToken, language);
-        botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
+        await eventsNextMessage(client, update, cancellationToken);
+        await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
         return;
     }
-
-    if (callbackQuery.Data.Equals(EventNotif))
-    {
-        await eventsNotifMessage(client, update, cancellationToken, language);
-        botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
-        return;
-    }
-
-
 
     if (callbackQuery.Data.Equals(BanqShop))
     {
-        await BanquetShopMessage(client, update, cancellationToken, language);
-        botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
+        await BanquetShopMessage(client, update, cancellationToken);
+        await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
         return;
     }
 
     if (callbackQuery.Data.Equals(GAS))
     {
-        await GASMessage(client, update, cancellationToken, language);
-        botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
+        await GASMessage(client, update, cancellationToken);
+        await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
         return;
     }
 
     if (callbackQuery.Data.Equals(MA))
     {
-        await MAMessage(client, update, cancellationToken, language);
-        botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
+        await MAMessage(client, update, cancellationToken);
+        await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
         return;
     }
-
-
 
     if (callbackQuery.Data.Equals(BackToMenu))
     {
@@ -514,33 +470,31 @@ async Task inlineKeyboardMessage(ITelegramBotClient client, CallbackQuery callba
 
 
 
-async Task MAMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task MAMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Визначаємо тип оновлення
+    // Define the type of update
     ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
     int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
 
-    //Зчитує текст для повідомлення
-    string filePathMAStart = Path.Combine(exeDir, $"{language}\\BanqStart.txt");
-    string MAStartText = File.ReadAllText(filePathMAStart);
-
-    string filePathMAStop = Path.Combine(exeDir, $"{language}\\BanqStop.txt");
-    string MAStopText = File.ReadAllText(filePathMAStop);
+    // Reads the text for the message
+    string MAStartText = langLocal.Localization.MAStart;
+    string MAStopText = langLocal.Localization.MAStop;
 
     string messageText = null;
 
+    //Defining the text of the message
     if (!MAUsers.ContainsKey(chatId))
-    {
-        //Надсилаємо повідомлення
+    {        
         messageText = MAStartText;
-        MAUsers.Add(chatId, language);
+        MAUsers.Add(chatId, selectLanguage(client, update, cancellationToken));
     }
     else
     {
-        //Надсилаємо повідомлення
         messageText = MAStopText;
         MAUsers.Remove(chatId);
     }
+
+    // Saving the user list
     SaveUsers(MAUsers, "MAUsers");
 
     await botClient.SendTextMessageAsync(
@@ -554,33 +508,31 @@ async Task MAMessage(ITelegramBotClient client, Update update, CancellationToken
     return;
 }
 
-async Task GASMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task GASMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Визначаємо тип оновлення
+    // Define the type of update
     ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
     int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
 
-    //Зчитує текст для повідомлення
-    string filePathGASStart = Path.Combine(exeDir, $"{language}\\GASStart.txt");
-    string GASStartText = File.ReadAllText(filePathGASStart);
-
-    string filePathGASStop = Path.Combine(exeDir, $"{language}\\GASStop.txt");
-    string GASStopText = File.ReadAllText(filePathGASStop);
+    // Reads the text for the message
+    string GASStartText = langLocal.Localization.GASStart;
+    string GASStopText = langLocal.Localization.GASStop;
 
     string messageText = null;
 
+    //Defining the text of the message
     if (!GASUsers.ContainsKey(chatId))
     {
-        //Надсилаємо повідомлення
         messageText = GASStartText;
-        GASUsers.Add(chatId, language);
+        GASUsers.Add(chatId, selectLanguage(client, update, cancellationToken));
     }
     else
     {
-        //Надсилаємо повідомлення
         messageText = GASStopText;
         GASUsers.Remove(chatId);
     }
+
+    // Saving the user list
     SaveUsers(GASUsers, "GASUsers");
 
     await botClient.SendTextMessageAsync(
@@ -594,76 +546,34 @@ async Task GASMessage(ITelegramBotClient client, Update update, CancellationToke
     return;
 }
 
-async Task BanquetShopMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task BanquetShopMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Визначаємо тип оновлення
+    // Define the type of update
     ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
     int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
 
-    //Зчитує текст для повідомлення
-    string filePathBanquetShopStart = Path.Combine(exeDir, $"{language}\\BanqStart.txt");
-    string BanquetShopStartText = File.ReadAllText(filePathBanquetShopStart);
-
-    string filePathBanquetShopStop = Path.Combine(exeDir, $"{language}\\BanqStop.txt");
-    string BanquetShopStopText = File.ReadAllText(filePathBanquetShopStop);
+    // Reads the text for the message
+    string BanquetShopStartText = langLocal.Localization.BanqStart;
+    string BanquetShopStopText = langLocal.Localization.BanqStop;
 
     string messageText = null;
 
+    //Defining the text of the message
     if (!banquetShopUsers.ContainsKey(chatId))
     {
-        //Надсилаємо повідомлення
         messageText = BanquetShopStartText;
-        banquetShopUsers.Add(chatId, language);
+        banquetShopUsers.Add(chatId, selectLanguage(client, update, cancellationToken));
     }
     else
     {
-        //Надсилаємо повідомлення
         messageText = BanquetShopStopText;
         banquetShopUsers.Remove(chatId);
     }
+
+    // Saving the user list
     SaveUsers(banquetShopUsers, "BanquetShopUsers");
 
     await botClient.SendTextMessageAsync(
-        chatId: chatId,
-        text: messageText,
-        disableNotification: true,
-        parseMode: ParseMode.Html,
-        replyToMessageId: messageId,
-        cancellationToken: cancellationToken
-        );
-    return;
-}
-
-async Task eventsNotifMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
-{
-    //Визначаємо тип оновлення
-    ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
-    int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
-
-    //Зчитує текст для повідомлення
-    string filePathEventsNotifStart = Path.Combine(exeDir, $"{language}\\event\\NotifStart.txt");
-    string EventsNotifStartText = File.ReadAllText(filePathEventsNotifStart);
-
-    string filePathEventsNotifStop = Path.Combine(exeDir, $"{language}\\event\\NotifStop.txt");
-    string EventsNotifStopText = File.ReadAllText(filePathEventsNotifStop);
-
-    string messageText = null;
-
-    if (!eventNotifUsers.ContainsKey(chatId))
-    {
-        //Надсилаємо повідомлення
-        messageText = EventsNotifStartText;
-        eventNotifUsers.Add(chatId, language);
-    }
-    else
-    {
-        //Надсилаємо повідомлення
-        messageText = EventsNotifStopText;
-        eventNotifUsers.Remove(chatId);
-    }
-    SaveUsers(eventNotifUsers, "eventNotifUsers");
-
-    await botClient.SendTextMessageAsync(            
         chatId: chatId,
         text: messageText,
         disableNotification: true,
@@ -681,75 +591,97 @@ void SaveUsers(Dictionary<ChatId, string> dictionary, string nameFile)
 
     try
     {
-        Directory.CreateDirectory(Path.GetDirectoryName(filePath)); // Спроба створити директорію
+        Directory.CreateDirectory(Path.GetDirectoryName(filePath)); // Attempting to create a directory
         string json = JsonConvert.SerializeObject(dictionary);
         File.WriteAllText(filePath, json);
     }
     catch (Exception ex)
     {
-        // Обробка можливих помилок при створенні директорії або запису в файл
-        Console.WriteLine($"Помилка при запису в файл: {ex.Message}");
-        // Можливо, потрібно виконати додаткову обробку помилки або повідомити користувача.
+        // Handling possible errors when creating a directory or writing to a file
+        Console.WriteLine($"Error writing to file: {ex.Message}");
     }
-
 }
 
 Dictionary<ChatId, string>? LoadUsers(string nameFile)
 {
-
+    // Get the base path for user files:
     string basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+    // Combine with the "Users" subdirectory and the specified filename:
     string filePath = Path.Combine(basePath, "Users", $"{nameFile}.json");
 
+    // Check if the file exists:
     if (File.Exists(filePath))
     {
+        // Read the JSON content from the file:
         string json = File.ReadAllText(filePath);
+        // Deserialize the JSON into a dictionary of ChatId to string:
         return JsonConvert.DeserializeObject<Dictionary<ChatId, string>>(json);
     }
-
-    return new Dictionary<ChatId, string>();
+    else
+    {
+        // File doesn't exist, return an empty dictionary:
+        return new Dictionary<ChatId, string>();
+    }
 }
 
-async Task eventsNextMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task eventsNextMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Визначаємо тип оновлення
+    // Determine the type of update
     ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
     int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
 
-    //Викликаємо метод розрахунку 3 днів та подій
+    // Call the method for calculating 3 days and events
     counterThreeDays();
-    checkingEvents(language);
+    checkingEvents();
 
     string[] ENextText = new string[4];
     string[] imagenEveNext = new string[4];
 
-    //Зчитуємо текст для повідомлення
-    string fileEventNext = Path.Combine(exeDir, $"{language}\\event\\eventNext.txt");
-    string EventNext = File.ReadAllText(fileEventNext);
+    // Read the text and image for the message
+    string EventNext = langLocal.Localization.eventNextMess;
+    Stream imageStream = null;
+    InputFile imagenEveNext0 = null;
 
-    string fileEveNextText0 = Path.Combine(exeDir, $"{language}\\event\\eventTextNext{EveNow}.txt");
-    ENextText[0] = File.ReadAllText(fileEveNextText0);
-
-    if (EveNextText1 != null) 
-    { 
-        ENextText[1] = File.ReadAllText(EveNextText1); 
-
+    switch (EveNext)
+    {
+        case 0:
+            ENextText[0] = langLocal.Localization.eventTextNext0;
+            imageStream = new MemoryStream(Images.eventImage0);
+            imagenEveNext0 = InputFile.FromStream(imageStream, "eventImage0");
+            break;
+        case 1:
+            ENextText[0] = langLocal.Localization.eventTextNext1;
+            imageStream = new MemoryStream(Images.eventImage1);
+            imagenEveNext0 = InputFile.FromStream(imageStream, "eventImage1");
+            break;
+        case 2:
+            ENextText[0] = langLocal.Localization.eventTextNext2;
+            imageStream = new MemoryStream(Images.eventImage2);
+            imagenEveNext0 = InputFile.FromStream(imageStream, "eventImage2");
+            break;
+        case 3:
+            ENextText[0] = langLocal.Localization.eventTextNext3;
+            imageStream = new MemoryStream(Images.eventImage3);
+            imagenEveNext0 = InputFile.FromStream(imageStream, "eventImage3");
+            break;
+        case 4:
+            ENextText[0] = langLocal.Localization.eventTextNext4;
+            imageStream = new MemoryStream(Images.eventImage4);
+            imagenEveNext0 = InputFile.FromStream(imageStream, "eventImage4");
+            break;
+        case 5:
+            ENextText[0] = langLocal.Localization.eventTextNext5;
+            imageStream = new MemoryStream(Images.eventImage5);
+            imagenEveNext0 = InputFile.FromStream(imageStream, "eventImage5");
+            break;
     }
-    if (EveNextText2 != null) 
-    { 
-        ENextText[2] = File.ReadAllText(EveNextText2);
 
-    }
-    if (EveNextText3 != null) 
-    { 
-        ENextText[3] = File.ReadAllText(EveNextText3);
 
-    }
+    if (EveNextText1 != null || EveNextText1 != default) { ENextText[1] = EveNextText1;}
+    if (EveNextText2 != null || EveNextText1 != default) { ENextText[2] = EveNextText2;}
+    if (EveNextText3 != null || EveNextText1 != default) { ENextText[3] = EveNextText3;}
 
-    //Зчитуємо зображення для повідомлення
-    string fileEveNextImg0 = Path.Combine(exeDir, $"img\\eventImage{EveNext}.png");
-    var imagenEveNext0 = InputFile.FromStream(File.OpenRead(fileEveNextImg0));
-
-    //Надсилаємо повідомлення
+    // Sending the message
     await botClient.SendPhotoAsync(
         chatId: chatId,
         photo: imagenEveNext0,
@@ -771,34 +703,63 @@ async Task eventsNextMessage(ITelegramBotClient client, Update update, Cancellat
     return;
 }
 
-async Task eventsNowMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task eventsNowMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Визначаємо тип оновлення
+    // Determine the type of update
     ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
     int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
 
-    //Викликаємо метод розрахунку 3 днів та подій
+    // Call the method for calculating 3 days and events
     counterThreeDays();
-    checkingEvents(language);
+    checkingEvents();
 
     string[] ENowText = new string[4];
 
-    //Зчитуємо текст для повідомлення
-    string fileEventNow = Path.Combine(exeDir, $"{language}\\event\\eventNow.txt");
-    string EventNow = File.ReadAllText(fileEventNow);
+    // Read the text and image for the message
+    string EventNow = langLocal.Localization.eventNowMess;
+    Stream imageStream = null;
+    InputFile imagenEveNow0 = null;
 
-    string fileEveNowText0 = Path.Combine(exeDir, $"{language}\\event\\eventTextNow{EveNow}.txt");
-    ENowText[0] = File.ReadAllText(fileEveNowText0);
-    
-    if (EveNowText1 != null || EveNowText1 != default) { ENowText[1] = File.ReadAllText(EveNowText1);}
-    if (EveNowText2 != null || EveNowText2 != default) { ENowText[2] = File.ReadAllText(EveNowText2);}
-    if (EveNowText3 != null || EveNowText3 != default) { ENowText[3] = File.ReadAllText(EveNowText3);}
-    
-    //Зчитуємо зображення для повідомлення
-    string fileEveNowImg0 = Path.Combine(exeDir, $"img\\eventImage{EveNow}.png");
-    var imagenEveNow0 = InputFile.FromStream(File.OpenRead(fileEveNowImg0));
-        
-    //Надсилаємо повідомлення
+    switch (EveNow)
+    {
+        case 0:
+            ENowText[0] = langLocal.Localization.eventTextNow0;
+            imageStream = new MemoryStream(Images.eventImage0);
+            imagenEveNow0 = InputFile.FromStream(imageStream, "eventImage0");
+            break;
+        case 1:
+            ENowText[0] = langLocal.Localization.eventTextNow1;
+            imageStream = new MemoryStream(Images.eventImage1);
+            imagenEveNow0 = InputFile.FromStream(imageStream, "eventImage1");
+            break;
+        case 2:
+            ENowText[0] = langLocal.Localization.eventTextNow2;
+            imageStream = new MemoryStream(Images.eventImage2);
+            imagenEveNow0 = InputFile.FromStream(imageStream, "eventImage2");
+            break;
+        case 3:
+            ENowText[0] = langLocal.Localization.eventTextNow3;
+            imageStream = new MemoryStream(Images.eventImage3);
+            imagenEveNow0 = InputFile.FromStream(imageStream, "eventImage3");
+            break;
+        case 4:
+            ENowText[0] = langLocal.Localization.eventTextNow4;
+            imageStream = new MemoryStream(Images.eventImage4);
+            imagenEveNow0 = InputFile.FromStream(imageStream, "eventImage4");
+            break;
+        case 5:
+            ENowText[0] = langLocal.Localization.eventTextNow5;
+            imageStream = new MemoryStream(Images.eventImage5);
+            imagenEveNow0 = InputFile.FromStream(imageStream, "eventImage5");
+            break;
+    }
+
+
+    if (EveNowText1 != null || EveNowText1 != default) { ENowText[1] = EveNowText1; }
+    if (EveNowText2 != null || EveNowText2 != default) { ENowText[2] = EveNowText2; }
+    if (EveNowText3 != null || EveNowText3 != default) { ENowText[3] = EveNowText3; }
+
+    // Sending the message
     await botClient.SendPhotoAsync(
         chatId: chatId,
         photo: imagenEveNow0,
@@ -820,115 +781,134 @@ async Task eventsNowMessage(ITelegramBotClient client, Update update, Cancellati
     return;
 }
 
-void checkingEvents(string language)
+void checkingEvents()
 {
-    while (WorldCommerce.AddDays(54) <= DateTime.Now)
-    {
-        WorldCommerce = WorldCommerce.AddDays(54);
 
-    }
-    if (WorldCommerce <= DateTime.Now && WorldCommerce.AddDays(3) >= DateTime.Now)
-    {
-
-        String WC = WorldCommerceText;
-        if (EveNowText1 == null) { EveNowText1 = WC; }
-        else if (EveNowText2 == null && EveNowText1 != WC) { EveNowText2 = WC; }
-    }
-    if (WorldCommerce.AddDays(54) <= DateTime.Now.AddDays(3) && WorldCommerce.AddDays(57) >= DateTime.Now.AddDays(3))
-    {
-        String WC = WorldCommerceText;
-        if (EveNextText1 == null) { EveNextText1 = WC; }
-        else if (EveNextText2 == null && EveNextText1 != WC) { EveNextText2 = WC; }        
-    }
-
-
-    
+    // **Handling events recurring every 54 days**
     foreach (var eventName in events54days.Keys.ToList())
     {
         DateTime eventDateTime = events54days[eventName];
+        // Loop until the eventDateTime is past the current date
         while (eventDateTime.AddDays(54) <= DateTime.Now)
         {
+            // Update eventDateTime to the next occurrence (every 54 days)
             eventDateTime = eventDateTime.AddDays(54);
+            // Update the eventDateTime in the events54days dictionary
             events54days[eventName] = eventDateTime;
         }
+        // Check if the event falls within the "Now" window (today and next 3 days)
         if (eventDateTime <= DateTime.Now && eventDateTime.AddDays(3) >= DateTime.Now)
         {
-            String PathFile = Path.Combine(exeDir, $"{language}\\eventSpec\\{eventName}.txt");
+            String PathFile = eventName;
+            // Assign the event name to EveNowText variables based on availability
             if (EveNowText1 == null) { EveNowText1 = PathFile; }
             else if (EveNowText2 == null) { EveNowText2 = PathFile; }
         }
+        // Check if the event falls within the "Next" window (3 days from now to 6 days from now)
         if (eventDateTime.AddDays(54) <= DateTime.Now.AddDays(3) && eventDateTime.AddDays(57) >= DateTime.Now.AddDays(3))
         {
-            String PathFile = Path.Combine(exeDir, $"{language}\\eventSpec\\{eventName}.txt");
+            String PathFile = eventName;
+            // Assign the event name to EveNextText variables based on availability
             if (EveNextText1 == null) { EveNextText1 = PathFile; }
-            else if (EveNextText2 == null) { EveNextText2 = PathFile; }            
+            else if (EveNextText2 == null) { EveNextText2 = PathFile; }
         }
     }
-
-
-
+    // **Handling events recurring every 30 days**
     foreach (var eventName in events30days.Keys.ToList())
     {
         DateTime eventDateTime = events30days[eventName];
+        // Loop until the eventDateTime is past the current date
         while (eventDateTime.AddDays(30) <= DateTime.Now)
         {
+            // Update eventDateTime to the next occurrence (every 30 days)
             eventDateTime = eventDateTime.AddDays(30);
+            // Update the eventDateTime in the events30days dictionary
             events30days[eventName] = eventDateTime;
         }
+        // Check if the event falls within the "Now" window (today and next 3 days)
         if (eventDateTime <= DateTime.Now && eventDateTime.AddDays(3) >= DateTime.Now)
         {
-            String PathFile = Path.Combine(exeDir, $"{language}\\eventSpec\\{eventName}.txt");
+            String PathFile = eventName;
+            // Assign the event name to EveNowText variables based on availability
             if (EveNowText1 == null) { EveNowText1 = PathFile; }
             else if (EveNowText2 == null) { EveNowText2 = PathFile; }
             else if (EveNowText3 == null) { EveNowText3 = PathFile; }            
         }
+        // Check if the event falls within the "Next" window (3 days from now to 6 days from now)
         if (eventDateTime.AddDays(30) <= DateTime.Now.AddDays(3) && eventDateTime.AddDays(33) >= DateTime.Now.AddDays(3))
         {
-            String PathFile = Path.Combine(exeDir, $"{language}\\eventSpec\\{eventName}.txt");
+            String PathFile = eventName;
+            // Assign the event name to EveNextText variables based on availability
             if (EveNextText1 == null) { EveNextText1 = PathFile; }
             else if (EveNextText2 == null) { EveNextText2 = PathFile; }            
         }
     }
-
-
-
+    // **Handling events recurring every 30 days**
     foreach (var eventName in events48days.Keys.ToList())
     {
         DateTime eventDateTime = events48days[eventName];
+        // Loop until the eventDateTime is past the current date
         while (eventDateTime.AddDays(48) <= DateTime.Now)
         {
+            // Update eventDateTime to the next occurrence (every 30 days)
             eventDateTime = eventDateTime.AddDays(48);
+            // Update the eventDateTime in the events30days dictionary
             events48days[eventName] = eventDateTime;
         }
         if (eventDateTime <= DateTime.Now && eventDateTime.AddDays(3) >= DateTime.Now)
         {
-            String PathFile = Path.Combine(exeDir, $"{language}\\eventSpec\\{eventName}.txt");
+            String PathFile = eventName;
+            // Assign the event name to EveNowText variables based on availability
             if (EveNowText1 == null) { EveNowText1 = PathFile; }
             else if (EveNowText2 == null) { EveNowText2 = PathFile; }            
         }
         if (eventDateTime.AddDays(48) <= DateTime.Now.AddDays(3) && eventDateTime.AddDays(51) >= DateTime.Now.AddDays(3))
         {
-            String PathFile = Path.Combine(exeDir, $"{language}\\eventSpec\\{eventName}.txt");
+            String PathFile = eventName;
+            // Assign the event name to EveNextText variables based on availability
             if (EveNextText1 == null) { EveNextText1 = PathFile; }
             else if (EveNextText2 == null) { EveNextText2 = PathFile; }            
         }
     }
 }
 
-async Task ratingsNextMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task ratingsNextMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Визначаємо тип оновлення
+    // Determine the type of update
     ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
     int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
 
-    //Викликаємо метод розрахунку 3 днів та подій
+    // Call the method for calculating 3 days and events
     counterThreeDays();
 
-    //Зчитує текст для повідомлення
-    string filePathRanNext = Path.Combine(exeDir, $"{language}\\rating\\textRankingNext{RanNext}.txt");
-    string ratingsNextText = File.ReadAllText(filePathRanNext);
+    // Read the text and image for the message
+    string ratingsNextText = null;
+    switch (RanNext)
+    {
+        case 0:
+            ratingsNextText = langLocal.Localization.textRankingNext0;
+            break;
+        case 1:
+            ratingsNextText = langLocal.Localization.textRankingNext1;
+            break;
+        case 2:
+            ratingsNextText = langLocal.Localization.textRankingNext2;
+            break;
+        case 3:
+            ratingsNextText = langLocal.Localization.textRankingNext3;
+            break;
+        case 4:
+            ratingsNextText = langLocal.Localization.textRankingNext4;
+            break;
+        case 5:
+            ratingsNextText = langLocal.Localization.textRankingNext5;
+            break;
+        case 6:
+            ratingsNextText = langLocal.Localization.textRankingNext6;
+            break;
+    }
 
-    //Надсилаємо повідомлення
+    // Sending the message
     await botClient.SendTextMessageAsync(
         chatId: chatId,
         text: ratingsNextText,
@@ -938,23 +918,45 @@ async Task ratingsNextMessage(ITelegramBotClient client, Update update, Cancella
         cancellationToken: cancellationToken
         );
     return;
-
 }
 
-async Task ratingsNowMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task ratingsNowMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Визначаємо тип оновлення
+    // Determine the type of update
     ChatId chatId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.Chat.Id : update.Message.Chat.Id;
     int messageId = update.Type == UpdateType.CallbackQuery ? update.CallbackQuery.Message.MessageId : update.Message.MessageId;
 
-    //Викликаємо метод розрахунку
+    // Call the method for calculating 3 days and events
     counterThreeDays();
 
-    //Зчитує текст для повідомлення
-    string filePathRanNow = Path.Combine(exeDir, $"{language}\\rating\\textRankingNow{RanNow}.txt");
-    string ratingsNowText = File.ReadAllText(filePathRanNow);
-        
-    //Надсилаємо повідомлення
+    // Read the text and image for the message
+    string ratingsNowText = null;
+    switch (RanNow)
+    {
+        case 0:
+            ratingsNowText = langLocal.Localization.textRankingNow0;
+            break;
+        case 1:
+            ratingsNowText = langLocal.Localization.textRankingNow1;
+            break;
+        case 2:
+            ratingsNowText = langLocal.Localization.textRankingNow2;
+            break;
+        case 3:
+            ratingsNowText = langLocal.Localization.textRankingNow3;
+            break;
+        case 4:
+            ratingsNowText = langLocal.Localization.textRankingNow4;
+            break;
+        case 5:
+            ratingsNowText = langLocal.Localization.textRankingNow5;
+            break;
+        case 6:
+            ratingsNowText = langLocal.Localization.textRankingNow6;
+            break;
+    }
+
+    // Sending the message
     await botClient.SendTextMessageAsync(
         chatId: chatId,
         text: ratingsNowText,
@@ -964,59 +966,67 @@ async Task ratingsNowMessage(ITelegramBotClient client, Update update, Cancellat
         cancellationToken: cancellationToken
         );
     return;
-
 }
 
+// Function to perform calculations related to a ranking system with a three-day cycle
 void counterThreeDays()
 {
+    // Variables to track procedure counts for current and next cycles
     int RanNowProc = 0;
     int RanNextProc = 0;
 
+    // Loop to iterate while the next ranking check date is not in the future
     while ((CheckRanking + TimeSpan.FromDays(3)) <= DateTime.Now)
     {
+        // Update the ranking check date by adding three days
         CheckRanking = CheckRanking.AddDays(3);
-
-        RanNowProc = RanNowProc - 1;
-
+        // Decrement the current procedure count
+        RanNowProc = RanNowProc --;
+        // Handle underflow by wrapping around to the maximum value (14 in this case)
         RanNowProc = RanNowProc == -1 ? 14 : RanNowProc;
-
+        // Reset text variables for current and next ranking periods (assuming these are used for display)
         EveNowText1 = default;
         EveNowText2 = default;
         EveNowText3 = default;
         
         EveNextText1 = default;
         EveNextText2 = default;
-        EveNextText3 = default;
-        
+        EveNextText3 = default;        
     }
 
+    // Pre-defined lookup tables for procedure and event assignments based on `RanNowProc`
     int[] RanNowProcToRanNow = { 0, 1, 2, 3, 0, 1, 4, 5, 0, 1, 2, 0, 6, 4, 5 };
     int[] RanNowProcToEveNow = { 0, 1, 2, 3, 0, 1, 3, 4, 0, 1, 2, 0, 1, 5, 4 };
 
+    // Look up the appropriate procedure number for the current window using `RanNowProc`
     RanNow = RanNowProcToRanNow[RanNowProc];
+    // Look up the appropriate event number for the current window using `RanNowProc`
     EveNow = RanNowProcToEveNow[RanNowProc];
 
-    RanNextProc = (RanNowProc + 14) % 15;
+    // Calculate the procedure number for the next three-day window
+    RanNextProc = (RanNowProc + 14) % 15; // Wrap around using modulo 15
+    // Look up the procedure number for the next three-day window using `RanNextProc`
     RanNext = RanNowProcToRanNow[RanNextProc];
+    // Look up the event number for the next three-day window using `RanNextProc`
     EveNext = RanNowProcToEveNow[RanNextProc];
 
 }
 
-async Task shortHelpMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task shortHelpMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Зчитує текст для повідомлення
+    // Reads the text for the message
     string shortHelpText = langLocal.Localization.shortMenu;
 
-    //Зчитує текст для кнопки
+    // Reads the text for the button
     string menuText = langLocal.Localization.Menu;
 
-    //Будуємо кнопку "Меню" для повідомлення
+    // Build the "Menu" button for the message
     var inlineKeyboardMenu = new InlineKeyboardMarkup(new[]
     {
         new [] { InlineKeyboardButton.WithCallbackData(menuText) }
     });
 
-    //Надсилаємо повідомлення
+    //Sending the message
     await botClient.SendTextMessageAsync(
         chatId: update.Message.Chat.Id,
         text: shortHelpText,
@@ -1029,12 +1039,12 @@ async Task shortHelpMessage(ITelegramBotClient client, Update update, Cancellati
     return;
 }
 
-async Task helpMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task helpMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Зчитується текст для повідомлення    
+    // Reads the text for the message  
     string helpText = langLocal.Localization.HelpMessText;
 
-    //Надсилаємо повідомлення
+    //Sending the message
     await botClient.SendTextMessageAsync(
         chatId: update.Message.Chat.Id,
         text: helpText,
@@ -1046,21 +1056,21 @@ async Task helpMessage(ITelegramBotClient client, Update update, CancellationTok
     return;
 }
 
-async Task greatingMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken, string language)
+async Task greatingMessage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
 {
-    //Зчитується текст для повідомлення
-    string greetingText = langLocal.Localization.Greeting;    
+    // Reads the text for the message
+    string greetingText = langLocal.Localization.Greeting;
 
-    //Зчитується текст для кнопки
+    // Reads the text for the button
     string menuText = langLocal.Localization.Menu;
-    
-    //Будуємо кнопку "Меню" для повідомлення
+
+    //Build the "Menu" button for the message
     var inlineKeyboardMenu = new InlineKeyboardMarkup(new[]
     {
         new [] { InlineKeyboardButton.WithCallbackData(menuText) }
     });
 
-    //Надсилаємо повідомлення
+    //Sending the message
     await botClient.SendTextMessageAsync(
         chatId: update.Message.Chat.Id,
         text: greetingText,
@@ -1073,16 +1083,49 @@ async Task greatingMessage(ITelegramBotClient client, Update update, Cancellatio
     return;
 }
 
+string selectLanguage(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
+{
+    // Check for null to avoid NullReferenceException
+    if (update == null) { throw new ArgumentNullException(nameof(update), "Update cannot be null."); }
+
+    // Try to get the LanguageCode from the message or CallbackQuery
+    string language = update.Message?.From?.LanguageCode ?? update.CallbackQuery?.From?.LanguageCode;
+
+    // Check if language is not empty or null
+    if (string.IsNullOrWhiteSpace(language))
+    {
+        // If the LanguageCode could not be obtained, set the default to "en"
+        language = "en";
+    }
+
+    return language;
+}
+
+// Asynchronous method for handling errors that occur during polling for Telegram bot updates
 Task HandlePollingErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken token)
 {
-    var ErrorMessage = exception switch
+  try
+  {
+    // Format the error message based on the exception type
+    var errorMessage = exception switch
     {
-        ApiRequestException apiRequestException
-            => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
-        _ => exception.ToString()
+      ApiRequestException apiRequestException =>
+      // Handle errors specifically related to Telegram API requests
+      $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
+      _ =>
+      // Handle any other type of exception
+      exception.ToString()
     };
 
-    Console.WriteLine(ErrorMessage);
-    return Task.CompletedTask;
+    // Log the error message to the console for debugging and monitoring
+    Console.WriteLine(errorMessage);
+  }
+  catch (Exception ex)
+  {
+    // Handle any unexpected errors that occur within this error handling method
+    Console.Error.WriteLine("Unexpected error in HandlePollingErrorAsync: " + ex.Message);
+  }
+  // Return a completed task representing the completion of this error handling method
+  return Task.CompletedTask;
 }
 
